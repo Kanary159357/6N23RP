@@ -1,0 +1,7 @@
+---
+import { serverDB } from "../firebase/fireabaseAdminInit";
+
+const ref = await serverDB.collection("Character").doc("Akuma").get();
+---
+
+<div>{JSON.stringify(ref.data())}</div>

@@ -1,0 +1,20 @@
+---
+import CharacterInfo from "../../components/CharacterInfo.astro";
+import Layout from "../../layouts/Layout.astro";
+import { V7CharNames } from "./../../constants/characterName";
+export function getStaticPaths() {
+  const V7Path = V7CharNames.map((name) => ({
+    params: { name },
+  }));
+
+  return V7Path;
+}
+
+const { name } = Astro.params;
+---
+
+<Layout
+  ><div class="p-50px">
+    <div class="h-60px text-5xl font-bold">{name}</div><CharacterInfo />
+  </div>
+</Layout>

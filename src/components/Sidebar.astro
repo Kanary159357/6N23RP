@@ -1,0 +1,30 @@
+---
+import { V7CharNames } from "./../constants/characterName";
+---
+
+<div class="w-200px bg-black_1 text-white_1">
+  <div class="h-60px flex justify-center items-center">
+    <a href="/">6N23RP.COM</a>
+  </div>
+  <div class="flex items-center flex-col">
+    <div
+      class="w-60px h-60px rounded-1/2 i-healthicons-ui-user-profile-outline"
+    >
+    </div>
+    로그인하세요
+  </div>
+  <ul>
+    {
+      V7CharNames.map((value) => (
+        <li>
+          <a
+            class="py-10px px-30px hover:(text-red-500 bg-black_2) inline-block w-full"
+            href={`/v7/${value}`}
+          >
+            {value}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</div>
