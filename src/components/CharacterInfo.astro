@@ -1,7 +1,10 @@
 ---
 import { serverDB } from "../firebase/fireabaseAdminInit";
+import CharacterTab from "./CharacterTab";
 
 const ref = await serverDB.collection("Character").doc("Akuma").get();
+
+console.log(ref.data());
 ---
 
-<div>{JSON.stringify(ref.data())}</div>
+<div><CharacterTab client:load information={ref.data()} /></div>

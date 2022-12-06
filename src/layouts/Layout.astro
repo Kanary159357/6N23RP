@@ -13,10 +13,12 @@ import Sidebar from "../components/Sidebar.astro";
     <title>{Astro.url.pathname}</title>
   </head>
   <body>
-    <main class="flex">
+    <main>
       <GlobalStyles />
-      <Sidebar />
-      <slot />
+      <div class="">
+        <Sidebar />
+      </div>
+      <div class="m-l-200px"><slot /></div>
     </main>
   </body>
 </html>

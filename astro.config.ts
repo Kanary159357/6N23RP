@@ -1,9 +1,12 @@
 import { defineConfig } from "astro/config";
 import Unocss from "unocss/astro";
 import vercel from "@astrojs/vercel/serverless";
-import { presetUno } from "unocss";
 import transformerVariantGroup from "@unocss/transformer-variant-group";
 import presetIcons from "@unocss/preset-icons";
+import { presetUno, toEscapedSelector as e } from "unocss";
+
+// https://astro.build/config
+import react from "@astrojs/react";
 
 // https://astro.build/config
 export default defineConfig({
@@ -19,6 +22,20 @@ export default defineConfig({
             "vertical-align": "middle",
           },
         }),
+      ],
+      rules: [
+        [/^scrollbar-hide$/, (_, { rawSelector }) => {
+          const selector = e(rawSelector)
+          return `
+            ${selector}{
+              scrollbar-width: none;
+              -ms-overflow-style: none;
+            }
+            ${selector}::-webkit-scrollbar{
+              color: blue;
+            }
+          `
+        }],
       ],
       theme: {
         breakpoints: {
@@ -45,5 +62,6 @@ export default defineConfig({
       },
       transformers: [transformerVariantGroup()],
     }),
+    react(),
   ],
 });
