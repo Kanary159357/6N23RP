@@ -2,7 +2,6 @@ import { initializeApp, cert } from 'firebase-admin/app';
 import { getApps, } from 'firebase-admin/app';
 import { getFirestore } from 'firebase-admin/firestore';
 
-
 const defaultAppConfig = {
     credential: cert({
         "projectId": import.meta.env.PROJECT_ID,

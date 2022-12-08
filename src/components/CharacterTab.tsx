@@ -1,3 +1,4 @@
+import React from "react";
 import {
   TabPanel,
   Tab,
@@ -6,8 +7,17 @@ import {
   ReactTabsFunctionComponent,
   TabProps,
 } from "react-tabs";
+import type { CharacterInformation } from "../types/CharacterInformation";
+import CharacterTable from "./CharacterTable";
+import StandingTable from "./Table/StandingTable";
 
-export default function CharacterTab({ information }) {
+export default function CharacterTab({
+  information,
+}: {
+  information: CharacterInformation;
+}) {
+  console.log(information.up);
+
   return (
     <Tabs>
       <TabList className={"flex"}>
@@ -17,7 +27,9 @@ export default function CharacterTab({ information }) {
         <StyledTab>주력기</StyledTab>
         <StyledTab>패턴</StyledTab>
       </TabList>
-      <TabPanel>{JSON.stringify(information)}</TabPanel>
+      <TabPanel>
+        <StandingTable data={information.standing} />
+      </TabPanel>
       <TabPanel>2</TabPanel>
       <TabPanel>3</TabPanel>
       <TabPanel>4</TabPanel>
