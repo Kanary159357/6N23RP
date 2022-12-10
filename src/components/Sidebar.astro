@@ -1,5 +1,21 @@
 ---
 import { V7CharNames } from "./../constants/characterName";
+import { verifyAdmin } from "../firebase/fireabaseAdminInit";
+import UserBox from "./UserBox";
+import LoginBox from "./LoginBox";
+
+const cookie = Astro.cookies;
+const token = cookie.get("token").value;
+let user;
+if (token && token !== "") {
+  const result = await verifyAdmin(token);
+
+  user = {
+    displayName: result.name,
+    uid: result.uid,
+    photoUrl: result.picture,
+  };
+}
 ---
 
 <div
@@ -9,12 +25,9 @@ import { V7CharNames } from "./../constants/characterName";
     <a href="/">6N23RP.COM</a>
   </div>
   <div class="flex items-center flex-col">
-    <div
-      class="w-60px h-60px rounded-1/2 i-healthicons-ui-user-profile-outline"
-    >
-    </div>
-    로그인하세요
+    {user ? <UserBox user={user} client:load /> : <LoginBox client:load />}
   </div>
+
   <ul>
     {
       V7CharNames.map((value) => (

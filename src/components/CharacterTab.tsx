@@ -6,6 +6,7 @@ import {
   ReactTabsFunctionComponent,
   TabProps,
 } from "react-tabs";
+import db from "../firebase/firebaseInit";
 import type { CharacterInformation } from "../types/CharacterInformation";
 import MainMoveTable from "./Table/MainMoveTable";
 import PunishTable from "./Table/PunishTable";
@@ -18,6 +19,7 @@ export default function CharacterTab({
 }: {
   information: CharacterInformation;
 }) {
+  const temp = db;
   return (
     <Tabs>
       <TabList className={"flex"}>
