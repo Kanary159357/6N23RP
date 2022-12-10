@@ -1,56 +1,38 @@
 export interface CharacterInformation {
-
-    standing: Standing[]
-    up: Up[]
+    standing: Punish[]
+    up: Punish[]
     combo: Skill[]
     Throw: Throw[]
     Extrahit: Extrahit[]
-    Info: InfoProps[];
-    Pattern: Pattern[];
-    WallCombo: WallCombo[];
+    Pattern: Skill[];
+    WallCombo: Skill[];
+    MainMove: MainMove[];
 }
 
 export const punishProps = ['frame', 'damage', 'command', 'range', 'hitframe', 'state'] as const
 
 export const skillProps = ['command', 'state'] as const;
 
-export type Standing = Record<typeof punishProps[number], string>
-export type Up = Record<typeof punishProps[number], string>
+export const mainMoveProps = ['command', 'damage', 'frame', 'guardFrame', 'hitframe', 'range', 'nickname', 'state'] as const
+export const throwProps = ['command', 'frame', 'way', 'damage', 'state'] as const
+export const extrahitProps = ['command', 'state'] as const
 
-
+export type Punish = Record<typeof punishProps[number], string>
 export type Skill = Record<typeof skillProps[number], string>
-export type WallCombo = Record<typeof skillProps[number], string>
-export type Pattern = Record<typeof skillProps[number], string>
+export type MainMove = Record<typeof mainMoveProps[number], string>
+export type Throw = Record<typeof throwProps[number], string>
+export type Extrahit = Record<typeof extrahitProps[number], string>
 
+export const allTableColumnProps = [...punishProps, ...skillProps, ...mainMoveProps, ...throwProps, ...extrahitProps];
 
-export interface MainMove {
-    command: string;
-    damage: string;
-    frame: string;
-    guardframe: string;
-    hitframe: string;
-    range: string;
-    nickname: string;
-    state: string;
-}
-
-export interface Throw {
-    command: string;
-    frame: any;
-    way: string;
-    damage: any;
-    state: string;
-}
-
-export interface Extrahit {
-    command: string;
-    state: string;
-    win: string;
-}
-
-export interface InfoProps {
-    punish: string;
-    combo: string;
-    dc: string;
-    name: string;
+export const labelText: Record<typeof allTableColumnProps[number], string> = {
+    "command": "커맨드",
+    "damage": "데미지",
+    "frame": "프레임",
+    "guardFrame": "가드프레임",
+    "hitframe": "히트프레임",
+    "nickname": "별명",
+    "range": "판정",
+    "state": "설명",
+    "way": "방향",
 }

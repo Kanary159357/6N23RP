@@ -13,8 +13,7 @@ export function getStaticPaths() {
 const { name } = Astro.params;
 ---
 
-<Layout
-  ><div class="p-50px">
-    <div class="h-60px text-5xl font-bold">{name}</div><CharacterInfo />
-  </div>
+<Layout>
+  <div class="h-4vw text-5xl font-bold align-middle">{name}</div><CharacterInfo
+  />
 </Layout>

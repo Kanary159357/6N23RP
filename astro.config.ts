@@ -23,6 +23,11 @@ export default defineConfig({
           },
         }),
       ],
+      shortcuts: {
+        "table-cell": "text-left align-middle p-10px",
+        "table-row": "border-t-1",
+        "table": "shadow border-none border-collapse w-full table-fixed rounded-sm"
+      },
       rules: [
         [/^scrollbar-hide$/, (_, { rawSelector }) => {
           const selector = e(rawSelector)
