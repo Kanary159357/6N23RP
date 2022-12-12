@@ -1,8 +1,6 @@
 import Cookies from "js-cookies";
 import { signInWithGoogle, signout } from "../firebase/firebaseInit";
-import { users } from "../store/user";
 import React from "react";
-import { useStore } from "@nanostores/react";
 
 export default function UserProfile({ user }) {
   const profile = useStore(users);
@@ -17,10 +15,6 @@ export default function UserProfile({ user }) {
       photoUrl: result.photoURL,
     });
   };
-
-  React.useEffect(() => {
-    users.set(user);
-  }, []);
 
   const handleLogout = async () => {
     await signout();

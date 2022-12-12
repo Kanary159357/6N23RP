@@ -13,7 +13,6 @@
   "dependencies": {
     "@astrojs/react": "^1.2.2",
     "@astrojs/vercel": "^2.3.4",
-    "@nanostores/react": "^0.4.0",
     "astro": "^1.6.12",
     "firebase": "^9.14.0",
     "firebase-admin": "^11.3.0",
