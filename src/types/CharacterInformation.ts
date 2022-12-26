@@ -17,11 +17,14 @@ export const mainMoveProps = ['command', 'damage', 'frame', 'guardFrame', 'hitfr
 export const throwProps = ['command', 'frame', 'way', 'damage', 'state'] as const
 export const extrahitProps = ['command', 'state'] as const
 
-export type Punish = Record<typeof punishProps[number], string>
-export type Skill = Record<typeof skillProps[number], string>
-export type MainMove = Record<typeof mainMoveProps[number], string>
-export type Throw = Record<typeof throwProps[number], string>
-export type Extrahit = Record<typeof extrahitProps[number], string>
+
+export type TableProps<T extends readonly string[]>= Record< T[number],string>
+
+export type Punish = TableProps<typeof punishProps>
+export type Skill = TableProps<typeof skillProps>
+export type MainMove = TableProps<typeof mainMoveProps>
+export type Throw = TableProps<typeof throwProps>
+export type Extrahit = TableProps<typeof extrahitProps>
 
 export const allTableColumnProps = [...punishProps, ...skillProps, ...mainMoveProps, ...throwProps, ...extrahitProps];
 

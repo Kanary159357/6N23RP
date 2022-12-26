@@ -1,20 +1,10 @@
 import * as React from "react";
-import {
-  Skill,
-  punishProps,
-  labelText,
-  skillProps,
-} from "../../types/CharacterInformation";
+import { Skill, skillProps } from "../../types/CharacterInformation";
 import TableHeader from "./TableHeader";
+import { sortCharacterRow } from "../../utils/sortCharacterRow";
+import Textarea from "../Textarea";
 export default function SkillTable({ data }: { data: Skill[] }) {
-  const sortedData = data.map((row) => {
-    return Object.fromEntries(
-      Object.entries(row).sort(([k1], [k2]) =>
-        skillProps.indexOf(k1) > skillProps.indexOf(k2) ? 1 : -1
-      )
-    );
-  });
-  console.log(sortedData);
+  const sortedData = data.map((row) => sortCharacterRow(row, skillProps));
   return (
     <table className="table">
       <colgroup>
@@ -32,22 +22,19 @@ export default function SkillTable({ data }: { data: Skill[] }) {
 }
 
 function TableRow({ row }: { row: Record<string | "command", string> }) {
-  const [rowValue, setRowValue] = React.useState(
-    getInitialObjectWithEmptyString(row)
-  );
-
+  const [editableRow, setEditableRow] = React.useState(row);
   const [isEdit, setIsEdit] = React.useState(true);
 
   const onCellChange = (type: string) => (value: string) => {
-    console.log(type, value);
-    setRowValue({
-      ["command"]: value,
+    setEditableRow({
+      ...row,
+      [type]: value,
     });
   };
 
   return (
     <tr className="table-row" key={row.command}>
-      {Object.entries(row).map(([cellKey, cellValue]) => (
+      {Object.entries(editableRow).map(([cellKey, cellValue]) => (
         <TableCell
           key={cellKey}
           isEdit={isEdit}
@@ -69,9 +56,11 @@ function TableCell({
   onChange: (value: string) => void;
 }) {
   return (
-    <td>
+    <td className="table-cell">
       {isEdit ? (
-        <input onChange={(e) => onChange(e.target.value)} value={cell} />
+        <div className="flex">
+          <Textarea className="box-border flex-1" onTextChange={onChange} value={cell} />
+        </div>
       ) : (
         <div>{cell}</div>
       )}
