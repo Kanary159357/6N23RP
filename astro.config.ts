@@ -24,14 +24,17 @@ export default defineConfig({
         }),
       ],
       shortcuts: {
-        "table-cell": "text-left align-middle p-10px",
+        "table-cell": "text-left align-middle p-10px h-50px",
         "table-row": "border-t-1",
-        "table": "shadow border-none border-collapse w-full table-fixed rounded-sm"
+        table:
+          "shadow border-none border-collapse w-full table-fixed rounded-sm",
       },
       rules: [
-        [/^scrollbar-hide$/, (_, { rawSelector }) => {
-          const selector = e(rawSelector)
-          return `
+        [
+          /^scrollbar-hide$/,
+          (_, { rawSelector }) => {
+            const selector = e(rawSelector);
+            return `
             ${selector}{
               scrollbar-width: none;
               -ms-overflow-style: none;
@@ -39,8 +42,40 @@ export default defineConfig({
             ${selector}::-webkit-scrollbar{
               color: blue;
             }
-          `
-        }],
+          `;
+          },
+        ],
+        [
+          /^details-popup$/,
+          (_, { rawSelector }) => {
+            const selector = e(rawSelector);
+            return `
+
+            ${selector}[open]>summary::before{
+              position: fixed;
+              top: 0;
+              right: 0;
+              bottom: 0;
+              left: 0;
+              z-index: 80;
+              display: block;
+              cursor: default;
+              content: " ";
+              background: transparent;
+            }
+            ${selector} > summary {
+              list-style: none;
+            }
+            ${selector}> summary::marker, ${selector}> summary::-webkit-details-marker {
+              display: none;
+            }
+            ${selector}>div{
+              z-index:90;
+              position: relative
+            }
+          `;
+          },
+        ],
       ],
       theme: {
         breakpoints: {

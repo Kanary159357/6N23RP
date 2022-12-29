@@ -18,7 +18,19 @@ export default function Textarea({
     }
   };
 
+  React.useEffect(() => {
+    if (ref.current) {
+      ref.current.style.height = ref.current.scrollHeight + "px";
+    }
+  }, []); // 마운트 시 textarea height 조정
+
   return (
-    <textarea className={`resize-none border-none outline-none overflow-auto	${className}`} ref={ref} onChange={handleTextChange} value={value}></textarea>
+    <textarea
+      rows={1}
+      className={`resize-none border-none outline-none overflow-auto break-keep	${className}`}
+      ref={ref}
+      onChange={handleTextChange}
+      value={value}
+    ></textarea>
   );
 }

@@ -19,7 +19,9 @@
     "js-cookies": "^1.0.4",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-tabs": "^6.0.0"
+    "react-modal": "^3.16.1",
+    "react-tabs": "^6.0.0",
+    "valtio": "^1.8.0"
   },
   "devDependencies": {
     "@iconify-json/gg": "^1.1.3",
