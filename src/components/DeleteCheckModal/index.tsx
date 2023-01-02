@@ -4,21 +4,14 @@ import PopupModal from "../Modal";
 import { closeModal, modalState } from "../Modal/store";
 import { CharacterInformation } from "../../types/CharacterInformation";
 import { pageState } from "../../store/pageStore";
-import { deleteV7Row } from "../../query/v7/deleteRow";
-import axios from "axios";
+import { deleteRow } from "../../query/v7/deleteRow";
 export default function DeleteCheckModal() {
   const { currentOpenedModal, row, columnType } = useSnapshot(modalState);
   const isOpen = currentOpenedModal === "deleteCheckModal";
 
-  const { characterName, user } = useSnapshot(pageState, { sync: true });
+  const { characterName } = useSnapshot(pageState, { sync: true });
   const handleDeleteRow = async () => {
-    // deleteV7Row({
-    //   row,
-    //   char: characterName,
-    //   columnType,
-    // });
-    const { data } = await axios.get("/api/v7/character");
-    console.log(data);
+    await deleteRow({ characterName, columnType, row });
     closeModal();
   };
   return (

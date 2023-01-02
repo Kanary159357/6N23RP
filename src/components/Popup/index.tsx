@@ -46,7 +46,7 @@ export function PopupItem({
 }) {
   return (
     <div
-      className={`text-center text-sm cursor-pointer hover:(bg-white_2) p-y-5px p-x-10px rounded-lg ${className}`}
+      className={`text-center text-sm cursor-pointer hover:bg-white_2 p-y-5px p-x-10px rounded-lg ${className}`}
       onClick={onClick}
     >
       {children}

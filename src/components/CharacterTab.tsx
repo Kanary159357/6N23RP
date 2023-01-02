@@ -15,7 +15,6 @@ import ThrowTable from "./Table/ThrowTable";
 import ModalContainer from "./Modal/container";
 import * as React from "react";
 import { setCharacterName, setUser } from "../store/pageStore";
-import axios from "axios";
 
 export default function CharacterTab({
   information,
@@ -34,20 +33,6 @@ export default function CharacterTab({
     setUser(user);
     setCharacterName(characterName);
   }, []);
-
-  React.useEffect(() => {
-    async function Test() {
-      await axios.post("/api/v7/character", {
-        body: {
-          characterName: "Jin",
-          columnType: "WallCombo",
-          row: {},
-        },
-      });
-    }
-
-    Test();
-  });
 
   return (
     <>
