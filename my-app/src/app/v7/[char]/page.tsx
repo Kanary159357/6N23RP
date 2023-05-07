@@ -39,15 +39,7 @@ async function CharPage({ params }: { params: { char: string } }) {
   }
 
   return (
-    <>
-      <div>
-        {/* @ts-expect-error Server Component */}
-        <Sidebar />
-      </div>
-      <div className="ml-[200px] h-full p-[50px]">
-        <CharacterTab information={ref} user={user} characterName={charName} />
-      </div>
-    </>
+    <CharacterTab information={ref} user={user} characterName={charName} />
   );
 }
 

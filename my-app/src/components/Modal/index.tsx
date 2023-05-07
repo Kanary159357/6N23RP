@@ -1,4 +1,4 @@
-import ReactModal, { Styles } from "react-modal";
+import ReactModal from "react-modal";
 
 export default function PopupModal({
   isOpen,
@@ -13,7 +13,7 @@ export default function PopupModal({
     <ReactModal
       onRequestClose={onRequestClose}
       className={
-        "absolute top-1/2 left-1/2 w-400px p-40px bg-white_1 -translate-x-2/4 -translate-y-2/4 flex flex-col gap-10px	items-center	rounded-sm"
+        "absolute top-1/2 left-1/2 w-[400px] p-[40px] bg-white_1 -translate-x-2/4 -translate-y-2/4 flex flex-col gap-[10px]	items-center	rounded-sm"
       }
       overlayClassName={"fixed top-0 left-0 right-0 bottom-0 z-50 bg-overlay"}
       isOpen={isOpen}

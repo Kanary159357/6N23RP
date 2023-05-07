@@ -17,10 +17,10 @@ export default function Popup({
   };
 
   return (
-    <details className=" details-popup" ref={detailsRef}>
+    <details className="details-popup" ref={detailsRef}>
       <summary className="flex">{trigger}</summary>
       <div>
-        <div className="w-80px absolute right-0 top-5px z-10 border-1 rounded-lg bg-white_1 ">
+        <div className="w-[80px] absolute right-0 top-[5px] z-10 border-1 rounded-lg bg-white_1 ">
           {contents.map((content) => (
             <PopupItem
               key={content.text}

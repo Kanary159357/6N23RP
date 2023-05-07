@@ -18,16 +18,16 @@ export default function DeleteCheckModal() {
     <PopupModal isOpen={isOpen} onRequestClose={closeModal}>
       <PopupModal.Header></PopupModal.Header>
       <PopupModal.Body>정말 삭제하시겠습니까?</PopupModal.Body>
-      <PopupModal.Footer className="flex gap-5px">
-        <div className="flex items-center justify-center	 gap-6px">
+      <PopupModal.Footer className="flex gap-[5px]">
+        <div className="flex items-center justify-center gap-[6px]">
           <button
-            className={`w-fit bg-black_1 text-white_1 p-y-5px p-x-25px flex items-center rounded-xl`}
+            className={`w-fit bg-black_1 text-white_1 py-[5px] px-[25px] flex items-center rounded-xl`}
             onClick={handleDeleteRow}
           >
             삭제
           </button>
           <button
-            className={`w-fit bg-black_1 text-white_1 p-y-5px p-x-25px flex items-center rounded-xl`}
+            className={`w-fit bg-black_1 text-white_1 py-[5px] px-[25px] flex items-center rounded-xl`}
             onClick={closeModal}
           >
             취소

@@ -10,6 +10,7 @@ import Textarea from "../Textarea";
 import Button from "../Button";
 import { openDeleteCheckModal } from "../Modal/store";
 import Popup from "../Popup";
+import { AiOutlineMore, AiOutlinePlus } from "react-icons/ai";
 export default function SkillTable({
   data,
   columnType,
@@ -80,9 +81,7 @@ function TableRow({
           </div>
         ) : (
           <Popup
-            trigger={
-              <div className="m-l-auto cursor-pointer i-gg-more-vertical-alt" />
-            }
+            trigger={<AiOutlineMore className="m-l-auto cursor-pointer" />}
             contents={[
               { text: "수정", onClick: () => console.log("hi") },
               {
@@ -121,13 +120,4 @@ function TableCell({
       )}
     </td>
   );
-}
-
-function getInitialObjectWithEmptyString(object: Record<string, string>) {
-  return Object.keys(object).reduce<Record<string, string>>((acc, cur) => {
-    return {
-      ...acc,
-      [cur]: "",
-    };
-  }, {});
 }

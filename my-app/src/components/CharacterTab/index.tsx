@@ -36,6 +36,16 @@ export default function CharacterTab({
     setCharacterName(characterName);
   }, []);
 
+  type Nested<T extends CharacterInformation> = {
+    title: string;
+    cellWidth: Record<keyof T[keyof T], number>;
+  };
+
+  const tableMeta: Nested<CharacterInformation> = {
+    title: "콤보",
+    cellWidth: "",
+  };
+
   return (
     <>
       <Tabs>
@@ -90,7 +100,7 @@ const StyledTab: ReactTabsFunctionComponent<TabProps> = ({
 }) => (
   <Tab
     {...otherProps}
-    className={`w-125px cursor-pointer leading-70px h-70px	text-center content-["21r21"] transition-all focus-visible:outline-none after:(content-empty w-0 block h-2px left-1/2 bottom-0 bg-red_1 ) aria-selected:after:w-full`}
+    className={`w-[125px] cursor-pointer leading-[70px] h-[70px] text-center content-[""] transition-all focus-visible:outline-none after:content-empty after:w-0 block after:h-[2px] after:left-1/2 after:bottom-0 after:bg-red_1 aria-selected:after:w-full`}
   >
     {children}
   </Tab>
@@ -107,7 +117,7 @@ function TableLayout({
 }) {
   return (
     <div className="m-b-40px">
-      <div className="text-2xl font-bold m-b-10px">{title}</div>
+      <div className="text-2xl font-bold m-b-[10px]">{title}</div>
       {children}
     </div>
   );

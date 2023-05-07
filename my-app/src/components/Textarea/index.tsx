@@ -9,7 +9,7 @@ export default function Textarea({
   className: string;
   onTextChange: (v: string) => void;
 }) {
-  const ref = React.useRef<HTMLTextAreaElement>();
+  const ref = React.useRef<HTMLTextAreaElement>(null);
 
   const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     onTextChange(e.target.value);
