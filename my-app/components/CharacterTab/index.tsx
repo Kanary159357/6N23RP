@@ -8,13 +8,12 @@ import {
   ReactTabsFunctionComponent,
   TabProps,
 } from "react-tabs";
-import type { CharacterInformation } from "@/types/CharacterInformation";
+import type { CharacterInformation } from "../../types/CharacterInformation";
 import MainMoveTable from "@/components/Table/MainMoveTable";
 import PunishTable from "@/components/Table/PunishTable";
 
 import SkillTable from "@/components/Table/SkillTable";
 import ThrowTable from "@/components/Table/ThrowTable";
-import ModalContainer from "@/components/Modal/container";
 import * as React from "react";
 import { setCharacterName, setUser } from "@/store/pageStore";
 
@@ -89,7 +88,6 @@ export default function CharacterTab({
           </TableLayout>
         </TabPanel>
       </Tabs>
-      <ModalContainer />
     </>
   );
 }

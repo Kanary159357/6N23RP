@@ -1,7 +1,7 @@
 import CharacterTab from "@/components/CharacterTab";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import { serverDB, verifyAdmin } from "@/firebase/fireabaseAdminInit";
-import { CharacterInformation } from "@/types/CharacterInformation";
+import { CharacterInformation } from "../../../types/CharacterInformation";
 import { Metadata } from "next";
 import { cookies } from "next/headers";
 import { useSearchParams } from "next/navigation";
