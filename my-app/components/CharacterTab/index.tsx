@@ -1,13 +1,5 @@
 "use client";
 
-import {
-  TabPanel,
-  Tab,
-  TabList,
-  Tabs,
-  ReactTabsFunctionComponent,
-  TabProps,
-} from "react-tabs";
 import type { CharacterInformation } from "../../types/CharacterInformation";
 import MainMoveTable from "@/components/Table/MainMoveTable";
 import PunishTable from "@/components/Table/PunishTable";
@@ -16,6 +8,7 @@ import SkillTable from "@/components/Table/SkillTable";
 import ThrowTable from "@/components/Table/ThrowTable";
 import * as React from "react";
 import { setCharacterName, setUser } from "@/store/pageStore";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 
 export default function CharacterTab({
   information,
@@ -40,21 +33,16 @@ export default function CharacterTab({
     cellWidth: Record<keyof T[keyof T], number>;
   };
 
-  const tableMeta: Nested<CharacterInformation> = {
-    title: "콤보",
-    cellWidth: "",
-  };
-
   return (
     <>
-      <Tabs>
-        <TabList className={"flex"}>
-          <StyledTab>콤보</StyledTab>
-          <StyledTab>딜레이캐치</StyledTab>
-          <StyledTab>잡기</StyledTab>
-          <StyledTab>주력기,패턴</StyledTab>
-        </TabList>
-        <TabPanel className={"p-y-20px"}>
+      <Tabs defaultValue="combo">
+        <TabsList className={"flex"}>
+          <TabsTrigger value="combo">콤보</TabsTrigger>
+          <TabsTrigger value="delay">딜레이캐치</TabsTrigger>
+          <TabsTrigger value="throw">잡기</TabsTrigger>
+          <TabsTrigger value="pattern">주력기,패턴</TabsTrigger>
+        </TabsList>
+        <TabsContent value="combo" className={"p-y-20px"}>
           <TableLayout title="콤보">
             <SkillTable data={information.combo} columnType={"combo"} />
           </TableLayout>
@@ -64,47 +52,45 @@ export default function CharacterTab({
           <TableLayout title="추가타">
             <SkillTable data={information.Extrahit} columnType={"Extrahit"} />
           </TableLayout>
-        </TabPanel>
-        <TabPanel>
-          <TableLayout title="선자세 딜캐">
-            <PunishTable data={information.standing} />
+        </TabsContent>
+        <TabsContent value="delay">
+          <TableLayout title="콤보">
+            <SkillTable data={information.combo} columnType={"combo"} />
           </TableLayout>
-          <TableLayout title="앉은자세 딜캐">
-            <PunishTable data={information.up} />
+          <TableLayout title="벽콤보">
+            <SkillTable data={information.WallCombo} columnType={"WallCombo"} />
           </TableLayout>
-        </TabPanel>
+          <TableLayout title="추가타">
+            <SkillTable data={information.Extrahit} columnType={"Extrahit"} />
+          </TableLayout>
+        </TabsContent>
 
-        <TabPanel>
-          <TableLayout title="잡기">
-            <ThrowTable data={information.Throw} />
+        <TabsContent value="throw">
+          <TableLayout title="콤보">
+            <SkillTable data={information.combo} columnType={"combo"} />
           </TableLayout>
-        </TabPanel>
-        <TabPanel>
-          <TableLayout title="주력기">
-            <MainMoveTable data={information.MainMove} />
+          <TableLayout title="벽콤보">
+            <SkillTable data={information.WallCombo} columnType={"WallCombo"} />
           </TableLayout>
-          <TableLayout title="패턴">
-            <SkillTable data={information.Pattern} columnType={"Pattern"} />
+          <TableLayout title="추가타">
+            <SkillTable data={information.Extrahit} columnType={"Extrahit"} />
           </TableLayout>
-        </TabPanel>
+        </TabsContent>
+        <TabsContent value="pattern">
+          <TableLayout title="콤보">
+            <SkillTable data={information.combo} columnType={"combo"} />
+          </TableLayout>
+          <TableLayout title="벽콤보">
+            <SkillTable data={information.WallCombo} columnType={"WallCombo"} />
+          </TableLayout>
+          <TableLayout title="추가타">
+            <SkillTable data={information.Extrahit} columnType={"Extrahit"} />
+          </TableLayout>
+        </TabsContent>
       </Tabs>
     </>
   );
 }
-
-const StyledTab: ReactTabsFunctionComponent<TabProps> = ({
-  children,
-  ...otherProps
-}) => (
-  <Tab
-    {...otherProps}
-    className={`w-[125px] cursor-pointer leading-[70px] h-[70px] text-center content-[""] transition-all focus-visible:outline-none after:content-empty after:w-0 block after:h-[2px] after:left-1/2 after:bottom-0 after:bg-red_1 aria-selected:after:w-full`}
-  >
-    {children}
-  </Tab>
-);
-
-StyledTab.tabsRole = "Tab";
 
 function TableLayout({
   title,

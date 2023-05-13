@@ -2,23 +2,22 @@ import {
   allTableColumnProps,
   labelText,
 } from "../../types/CharacterInformation";
+import { TableHead, TableHeader, TableRow } from "../ui/table";
 
-export default function TableHeader({
+export default function SkillTableHeader({
   headers,
 }: {
-  headers: readonly typeof allTableColumnProps[number][];
+  headers: readonly (typeof allTableColumnProps)[number][];
 }) {
   return (
     <>
-      <thead>
-        <tr className="table-row">
+      <TableHeader>
+        <TableRow>
           {headers.map((value) => (
-            <th className="table-cell" key={value}>
-              {labelText[value]}
-            </th>
+            <TableHead key={value}>{labelText[value]}</TableHead>
           ))}
-        </tr>
-      </thead>
+        </TableRow>
+      </TableHeader>
     </>
   );
 }

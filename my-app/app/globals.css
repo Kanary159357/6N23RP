@@ -22,11 +22,11 @@
     --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 243 11% 4%;
+    --secondary-foreground: 0 0% 98%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 243 11% 4%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 100% 50%;
     --destructive-foreground: 210 40% 98%;
@@ -82,7 +82,7 @@
 
 @layer components {
   .table-cell {
-    @apply text-left align-middle p-[10px] h-[50px];
+    @apply text-left h-[50px];
   }
   .table-row {
     @apply border-t-[1px];
