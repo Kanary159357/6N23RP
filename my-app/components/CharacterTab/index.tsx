@@ -1,11 +1,8 @@
 "use client";
 
 import type { CharacterInformation } from "../../types/CharacterInformation";
-import MainMoveTable from "@/components/Table/MainMoveTable";
-import PunishTable from "@/components/Table/PunishTable";
 
 import SkillTable from "@/components/Table/SkillTable";
-import ThrowTable from "@/components/Table/ThrowTable";
 import * as React from "react";
 import { setCharacterName, setUser } from "@/store/pageStore";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
@@ -36,55 +33,63 @@ export default function CharacterTab({
   return (
     <>
       <Tabs defaultValue="combo">
-        <TabsList className={"flex"}>
-          <TabsTrigger value="combo">콤보</TabsTrigger>
-          <TabsTrigger value="delay">딜레이캐치</TabsTrigger>
-          <TabsTrigger value="throw">잡기</TabsTrigger>
-          <TabsTrigger value="pattern">주력기,패턴</TabsTrigger>
+        <TabsList className={"flex w-fit"}>
+          <TabsTrigger className="w-[150px]" value="combo">
+            콤보
+          </TabsTrigger>
+          <TabsTrigger className="w-[150px]" value="delay">
+            딜레이캐치
+          </TabsTrigger>
+          <TabsTrigger className="w-[150px]" value="throw">
+            잡기
+          </TabsTrigger>
+          <TabsTrigger className="w-[150px]" value="pattern">
+            주력기,패턴
+          </TabsTrigger>
         </TabsList>
         <TabsContent value="combo" className={"p-y-20px"}>
           <TableLayout title="콤보">
-            <SkillTable data={information.combo} columnType={"combo"} />
+            <SkillTable data={information.combo} />
           </TableLayout>
           <TableLayout title="벽콤보">
-            <SkillTable data={information.WallCombo} columnType={"WallCombo"} />
+            <SkillTable data={information.WallCombo} />
           </TableLayout>
           <TableLayout title="추가타">
-            <SkillTable data={information.Extrahit} columnType={"Extrahit"} />
+            <SkillTable data={information.Extrahit} />
           </TableLayout>
         </TabsContent>
         <TabsContent value="delay">
           <TableLayout title="콤보">
-            <SkillTable data={information.combo} columnType={"combo"} />
+            <SkillTable data={information.combo} />
           </TableLayout>
           <TableLayout title="벽콤보">
-            <SkillTable data={information.WallCombo} columnType={"WallCombo"} />
+            <SkillTable data={information.WallCombo} />
           </TableLayout>
           <TableLayout title="추가타">
-            <SkillTable data={information.Extrahit} columnType={"Extrahit"} />
+            <SkillTable data={information.Extrahit} />
           </TableLayout>
         </TabsContent>
 
         <TabsContent value="throw">
           <TableLayout title="콤보">
-            <SkillTable data={information.combo} columnType={"combo"} />
+            <SkillTable data={information.combo} />
           </TableLayout>
           <TableLayout title="벽콤보">
-            <SkillTable data={information.WallCombo} columnType={"WallCombo"} />
+            <SkillTable data={information.WallCombo} />
           </TableLayout>
           <TableLayout title="추가타">
-            <SkillTable data={information.Extrahit} columnType={"Extrahit"} />
+            <SkillTable data={information.Extrahit} />
           </TableLayout>
         </TabsContent>
         <TabsContent value="pattern">
           <TableLayout title="콤보">
-            <SkillTable data={information.combo} columnType={"combo"} />
+            <SkillTable data={information.combo} />
           </TableLayout>
           <TableLayout title="벽콤보">
-            <SkillTable data={information.WallCombo} columnType={"WallCombo"} />
+            <SkillTable data={information.WallCombo} />
           </TableLayout>
           <TableLayout title="추가타">
-            <SkillTable data={information.Extrahit} columnType={"Extrahit"} />
+            <SkillTable data={information.Extrahit} />
           </TableLayout>
         </TabsContent>
       </Tabs>
