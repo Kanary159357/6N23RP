@@ -13,7 +13,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {" "}
         <div>
           {/* @ts-expect-error Server Component */}
           <Sidebar />
