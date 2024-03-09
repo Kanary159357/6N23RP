@@ -1,4 +1,4 @@
-export function sortCharacterRow<T extends { [s: string]: string }>(
+export function sortRowByMap<T extends { [s: string]: string }>(
   row: T,
   sortMap: readonly (keyof T)[]
 ) {

@@ -1,10 +1,8 @@
 import CharacterTab from "@/components/CharacterTab";
-import Sidebar from "@/components/Sidebar/Sidebar";
 import { serverDB, verifyAdmin } from "@/firebase/fireabaseAdminInit";
-import { CharacterInformation } from "../../../types/CharacterInformation";
+import { CharacterInformation, CharacterInformationSchema, characterInformationPropsMapper, sortObjectProperties } from "../../../types/CharacterInformation";
 import { Metadata } from "next";
 import { cookies } from "next/headers";
-import { useSearchParams } from "next/navigation";
 
 type Props = {
   params: { char: string };
@@ -20,10 +18,10 @@ async function CharPage({ params }: { params: { char: string } }) {
   const charName = params.char;
   if (charName === null) return null;
 
-  const ref = (
+  const ref =CharacterInformationSchema.parse((
     await serverDB.collection("Character").doc(charName).get()
-  ).data() as CharacterInformation;
-
+  ).data())
+  console.log(ref);
   const cookieStore = cookies();
   const token = cookieStore.get("token")?.value;
 

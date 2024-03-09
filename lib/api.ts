@@ -1,3 +1,5 @@
+import { V7CharNames } from "@/constants/characterName";
+
 interface UpdateBodyRequest {
   characterName: (typeof V7CharNames)[number];
   oldRow: Record<string, string>;

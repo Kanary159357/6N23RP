@@ -1,12 +1,11 @@
 import * as React from "react";
-import { Skill, skillProps } from "../../types/CharacterInformation";
+import { MainMove, Punish, Skill, skillProps } from "../../types/CharacterInformation";
 import TableHeader from "./TableHeader";
-import { sortCharacterRow } from "../../lib/sortCharacterRow";
+import { sortRowByMap } from "../../lib/sortRowByMap";
 import {
   Table,
   TableBody,
   TableCell,
-  TableFooter,
   TableRow,
 } from "../ui/table";
 import { useState } from "react";
@@ -26,19 +25,17 @@ import {
 } from "../ui/dialog";
 import { Button } from "../ui/button";
 import { DialogClose } from "@radix-ui/react-dialog";
-import { V7CharNamesType } from "@/constants/characterName";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useGetCharacterNameByPath } from "@/hooks/useGetCharacterNameByPath";
 import { DialogItem } from "../ui/dialogItem";
 import { updateCharacterRow } from "@/lib/api";
-export default function SkillTable({
+export default function CharacterTable({
   tableType,
   data,
 }: {
   tableType: string;
-  data: Skill[];
+  data: Array<Punish| MainMove| Skill>;
 }) {
-  const sortedData = data.map((row) => sortCharacterRow(row, skillProps));
 
   const [isAdd, setIsAdd] = useState(false);
   const ref = React.useRef<Record<string, HTMLTextAreaElement>>({});
@@ -71,8 +68,8 @@ export default function SkillTable({
         </colgroup>
         <TableHeader headers={skillProps} />
         <TableBody>
-          {sortedData.map((row) => (
-            <SkillTableRow tableType={tableType} row={row} key={row.command} />
+          {data.map((row) => (
+            <CharacterTableRow tableType={tableType} row={row} key={row.command} />
           ))}
           {isAdd && (
             <TableRow>
@@ -108,7 +105,7 @@ export default function SkillTable({
   );
 }
 
-function SkillTableRow({
+function CharacterTableRow({
   row,
   tableType,
 }: {

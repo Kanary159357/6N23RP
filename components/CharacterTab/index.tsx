@@ -1,11 +1,11 @@
 "use client";
 
-import type { CharacterInformation } from "../../types/CharacterInformation";
 
-import SkillTable from "@/components/Table/SkillTable";
 import * as React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import { useGetCharacterNameByPath } from "@/hooks/useGetCharacterNameByPath";
+import { CharacterInformation, characterInformationProps } from "@/types/CharacterInformation";
+import CharacterTable from "@/components/Table/CharacterTable";
 
 const tableMapper = {
   combo: {
@@ -60,9 +60,14 @@ export default function CharacterTab({
               </TabsTrigger>
             ))}
         </TabsList>
-        <TabsContent value="combo" className={"p-y-20px"}>
-          <SkillTable data={information.combo} tableType={"combo"} />
-        </TabsContent>
+
+        {characterInformationProps.map((v)=>{
+          return (
+            <TabsContent value={v} className={"p-y-20px"} key={v}>
+              <CharacterTable data={information[v]} tableType={v} />
+            </TabsContent>
+          )
+        })}
       </Tabs>
     </>
   );

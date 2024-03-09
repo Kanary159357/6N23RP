@@ -1,60 +1,69 @@
-export interface CharacterInformation {
-  standing: Punish[];
-  up: Punish[];
-  combo: Skill[];
-  Throw: Throw[];
-  Extrahit: Extrahit[];
-  Pattern: Skill[];
-  WallCombo: Skill[];
-  MainMove: MainMove[];
-}
+import { getTypedKeys } from "@/lib/getTypedKeys";
+import { z } from "zod";
 
-export const punishProps = [
-  "frame",
-  "damage",
-  "command",
-  "range",
-  "hitframe",
-  "state",
-] as const;
+const punishSchema = z.object({
+  frame: z.string().optional(),
+  damage: z.string().optional(),
+  command: z.string().optional(),
+  range: z.string().optional(),
+  hitframe: z.string().optional(),
+  state: z.string().optional(),
+});
 
-export const skillProps = ["command", "state"] as const;
+const skillSchema = z.object({
+  command: z.string().optional(),
+  state: z.string().optional(),
+});
 
-export const mainMoveProps = [
-  "command",
-  "damage",
-  "frame",
-  "guardFrame",
-  "hitframe",
-  "range",
-  "nickname",
-  "state",
-] as const;
-export const throwProps = [
-  "command",
-  "frame",
-  "way",
-  "damage",
-  "state",
-] as const;
-export const extrahitProps = ["command", "state"] as const;
+const mainMoveSchema = z.object({
+  command: z.string().optional(),
+  damage: z.string().optional(),
+  frame: z.string().optional(),
+  guardFrame: z.string().optional(),
+  hitframe: z.string().optional(),
+  range: z.string().optional(),
+  nickname: z.string().optional(),
+  state: z.string().optional(),
+});
 
-export type TableProps<T extends readonly string[]> = Record<T[number], string>;
+const throwSchema = z.object({
+  command: z.string().optional(),
+  frame: z.string().optional(),
+  way: z.string().optional(),
+  damage: z.string().optional(),
+  state: z.string().optional(),
+});
 
-export type Punish = TableProps<typeof punishProps>;
-export type Skill = TableProps<typeof skillProps>;
-export type MainMove = TableProps<typeof mainMoveProps>;
-export type Throw = TableProps<typeof throwProps>;
-export type Extrahit = TableProps<typeof extrahitProps>;
+const extrahitSchema = z.object({
+  command: z.string().optional(),
+  state: z.string().optional(),
+});
 
-type B = CharacterInformation[keyof CharacterInformation][number];
-type Keys<T> = T extends { [key: string]: any } ? keyof T : never;
-type AllKeysUnion<T extends { [s in keyof T]: unknown[] }> = {
-  [K in keyof T]: Keys<T[K][number]>;
-};
 
-type Test = AllKeysUnion<CharacterInformation>;
 
+export type Punish = z.infer<typeof punishSchema>;
+export type Skill = z.infer<typeof skillSchema>;
+export type MainMove = z.infer<typeof mainMoveSchema>;
+export type Throw = z.infer<typeof throwSchema>;
+export type Extrahit = z.infer<typeof extrahitSchema>;
+
+export const CharacterInformationSchema = z.object({
+  standing: z.array(punishSchema),
+  up: z.array(punishSchema),
+  combo: z.array(skillSchema),
+  Throw: z.array(throwSchema),
+  Extrahit: z.array(extrahitSchema),
+  Pattern: z.array(skillSchema),
+  WallCombo: z.array(skillSchema),
+  MainMove: z.array(mainMoveSchema),
+});
+
+export const punishProps = getTypedKeys(punishSchema.shape);
+export const skillProps = getTypedKeys(skillSchema.shape);
+export const mainMoveProps = getTypedKeys(mainMoveSchema.shape);
+export const throwProps = getTypedKeys(throwSchema.shape);
+export const extrahitProps = getTypedKeys(extrahitSchema.shape);
+export const characterInformationProps = getTypedKeys(CharacterInformationSchema.shape);
 export const allTableColumnProps = [
   ...punishProps,
   ...skillProps,
@@ -62,8 +71,19 @@ export const allTableColumnProps = [
   ...throwProps,
   ...extrahitProps,
 ];
+export const characterInformationPropsMapper = {
+  standing: punishSchema,
+  up:punishSchema,
+  combo: skillSchema,
+  Throw: throwSchema,
+  Extrahit: extrahitSchema,
+  Pattern: skillSchema,
+  WallCombo: skillSchema,
+  MainMove: skillSchema,
+};
+export type CharacterInformation = z.infer<typeof CharacterInformationSchema>;
 
-export const labelText: Record<typeof allTableColumnProps[number], string> = {
+export const labelText: Record<string, string> = {
   command: "커맨드",
   damage: "데미지",
   frame: "프레임",
@@ -73,4 +93,18 @@ export const labelText: Record<typeof allTableColumnProps[number], string> = {
   range: "판정",
   state: "설명",
   way: "방향",
+};
+
+export const sortObjectProperties = <T extends z.ZodRawShape>(
+  obj: Record<string, unknown>,
+  schema: z.ZodObject<T>
+): Record<string, unknown> => {
+  const sortedObj: Record<string, unknown> = {};
+  Object.keys(schema.shape)
+    .forEach((key) => {
+      if (obj.hasOwnProperty(key)) {
+        sortedObj[key] = obj[key];
+      }
+    });
+  return sortedObj;
 };
