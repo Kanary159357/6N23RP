@@ -1,5 +1,5 @@
 import * as React from "react";
-import { MainMove, Punish, Skill, skillProps } from "../../types/CharacterInformation";
+import { MainMove, Punish, Skill, TableType, characterInformationProps, characterInformationPropsMapper, skillProps } from "../../types/CharacterInformation";
 import TableHeader from "./TableHeader";
 import { sortRowByMap } from "../../lib/sortRowByMap";
 import {
@@ -33,8 +33,8 @@ export default function CharacterTable({
   tableType,
   data,
 }: {
-  tableType: string;
-  data: Array<Punish| MainMove| Skill>;
+  tableType: typeof characterInformationProps[number];
+  data: Array<TableType>;
 }) {
 
   const [isAdd, setIsAdd] = useState(false);
@@ -61,12 +61,8 @@ export default function CharacterTable({
   return (
     <>
       <Table>
-        <colgroup>
-          <col width={"40%"} />
-          <col width={"60%"} />
-          <col width={"130px"} />
-        </colgroup>
-        <TableHeader headers={skillProps} />
+
+        <TableHeader headers={characterInformationPropsMapper[tableType]} />
         <TableBody>
           {data.map((row) => (
             <CharacterTableRow tableType={tableType} row={row} key={row.command} />

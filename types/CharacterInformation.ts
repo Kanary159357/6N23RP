@@ -46,7 +46,7 @@ export type Skill = z.infer<typeof skillSchema>;
 export type MainMove = z.infer<typeof mainMoveSchema>;
 export type Throw = z.infer<typeof throwSchema>;
 export type Extrahit = z.infer<typeof extrahitSchema>;
-
+export type TableType = Punish|Skill|MainMove|Throw|Extrahit;
 export const CharacterInformationSchema = z.object({
   standing: z.array(punishSchema),
   up: z.array(punishSchema),
@@ -72,14 +72,14 @@ export const allTableColumnProps = [
   ...extrahitProps,
 ];
 export const characterInformationPropsMapper = {
-  standing: punishSchema,
-  up:punishSchema,
-  combo: skillSchema,
-  Throw: throwSchema,
-  Extrahit: extrahitSchema,
-  Pattern: skillSchema,
-  WallCombo: skillSchema,
-  MainMove: skillSchema,
+  standing: punishProps,
+  up:punishProps,
+  combo: skillProps,
+  Throw: throwProps,
+  Extrahit: extrahitProps,
+  Pattern: skillProps,
+  WallCombo: skillProps,
+  MainMove: mainMoveProps,
 };
 export type CharacterInformation = z.infer<typeof CharacterInformationSchema>;
 
@@ -93,6 +93,34 @@ export const labelText: Record<string, string> = {
   range: "판정",
   state: "설명",
   way: "방향",
+};
+
+
+export const tableKeyTextMap = {
+  combo: {
+    name: "콤보",
+  },
+  standing: {
+    name: "선자세 딜캐",
+  },
+  up: {
+    name: "앉은자세 딜캐",
+  },
+  MainMove: {
+    name: "주력기",
+  },
+  Pattern: {
+    name: "패턴",
+  },
+  WallCombo:{
+    name: "벽콤보"
+  },
+  Throw: {
+    name: "잡기",
+  },
+  Extrahit: {
+    name: "추가타",
+  },
 };
 
 export const sortObjectProperties = <T extends z.ZodRawShape>(

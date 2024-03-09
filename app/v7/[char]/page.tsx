@@ -1,6 +1,6 @@
 import CharacterTab from "@/components/CharacterTab";
 import { serverDB, verifyAdmin } from "@/firebase/fireabaseAdminInit";
-import { CharacterInformation, CharacterInformationSchema, characterInformationPropsMapper, sortObjectProperties } from "../../../types/CharacterInformation";
+import {  CharacterInformationSchema,  } from "../../../types/CharacterInformation";
 import { Metadata } from "next";
 import { cookies } from "next/headers";
 
